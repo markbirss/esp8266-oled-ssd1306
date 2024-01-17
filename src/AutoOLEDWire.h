@@ -50,6 +50,8 @@
 #define SH1106_SET_PUMP_MODE 0XAD
 #define SH1106_PUMP_ON 0X8B
 #define SH1106_PUMP_OFF 0X8A
+
+#define SH1107_COMMAND_SET_START_LINE 0xDC
 //--------------------------------------
 
 class AutoOLEDWire : public OLEDDisplay {
@@ -170,6 +172,7 @@ class AutoOLEDWire : public OLEDDisplay {
           sendCommand(PAGEADDR);
           sendCommand(minBoundY);
           sendCommand(maxBoundY);
+          
   
           for (y = minBoundY; y <= maxBoundY; y++) {
             for (x = minBoundX; x <= maxBoundX; x++) {
@@ -196,6 +199,8 @@ class AutoOLEDWire : public OLEDDisplay {
             // we have an SH1107
             minBoundXp2H = (minBoundX) & 0x0F;
             minBoundXp2L = 0x10 | ((minBoundX) >> 4 );
+            sendCommand(SH1107_COMMAND_SET_START_LINE);
+            sendCommand(0x00);
           }
   
           for (y = minBoundY; y <= maxBoundY; y++) {
