@@ -52,6 +52,7 @@
 #define SH1106_PUMP_OFF 0X8A
 
 #define SH1107_COMMAND_SET_START_LINE 0xDC
+#define SH1107_COMMAND_CHARGE_PUMP 0xAD
 //--------------------------------------
 
 class AutoOLEDWire : public OLEDDisplay {
@@ -200,6 +201,9 @@ class AutoOLEDWire : public OLEDDisplay {
             minBoundXp2H = (minBoundX) & 0x0F;
             minBoundXp2L = 0x10 | ((minBoundX) >> 4 );
             sendCommand(SH1107_COMMAND_SET_START_LINE);
+            sendCommand(0x00);
+            sendCommand(SH1107_COMMAND_CHARGE_PUMP);
+            sendCommand(0x8A);
             sendCommand(0x00);
           }
   
